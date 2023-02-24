@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Theatre {
     public static void main(String[] args) {
 
-        int [] row1 = {0,0,0,0,0,0,0,0,0,0,0,0};
+        int [] row1 = {0,0,0,0,0,0,0,0,1,0,0,0};
         int [] row2 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         int [] row3 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         boolean repeat = true;
@@ -237,5 +237,13 @@ public class Theatre {
     }
 
     public static void save(int[] row1, int[] row2, int[] row3) {
+        try {
+            FileWriter seatFile = new FileWriter("SeatInfo.txt");
+            seatFile.write(Arrays.toString(row1)+"\n"+Arrays.toString(row2)+"\n"+Arrays.toString(row3));
+            seatFile.close();
+            System.out.println("Seat information was successfully written to file");
+        } catch (IOException e) {
+            System.out.println("An error was occurred while writing to file");
+        }
     }
 }
