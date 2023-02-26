@@ -1,39 +1,34 @@
 public class test2 {
-        public static void main(String[] args) {
-            int [] row1 = {0,0,0,0,1,0,0,1,0,1,0,0};
-            int [] row2 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-            int [] row3 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    public static void main(String[] args) {
+        int [] row1 = {0,0,0,0,0,0,0,0,0,0,0,0};
+        int [] row2 = {1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1};
+        int [] row3 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0};
 
+        System.out.print("Seats available in row 1 : ");
+        print_seats_available(row1);
 
-            System.out.println("\t***********\n\t*  STAGE  *\n\t***********");
-            System.out.print("\t");
-            print(row1);
-            System.out.print("\n  ");
-            print(row2);
-            System.out.println();
-            print(row3);
+        System.out.print("\nSeats available in row 2 : ");
+        print_seats_available(row2);
+
+        System.out.print("\nSeats available in row 3 : ");
+        print_seats_available(row3);
+
+        System.out.println("\n\n");
     }
 
-    public static void print(int[] row) {
-        int count=1;
-        for (int element:row) {
+    public static void print_seats_available(int []row) {
+        int count = 0;
 
-            if (count==(row.length)/2) {
-                if (element == 0)
-                    System.out.print("O");
-                else
-                    System.out.print("X");
-
-                System.out.print(" ");
+        for (int i = 0; i < row.length; i++) {
+            if (row[i] == 0) {
+                count++;
+                if (count == 1) {
+                    System.out.print(i+1);
+                } else {
+                    System.out.print("," + (i+1));
+                }
             }
-            else {
-                if (element == 0)
-                    System.out.print("O");
-                else
-                    System.out.print("X");
-            }
-
-            count+=1;
         }
+        System.out.print(".");
     }
 }
