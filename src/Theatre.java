@@ -1,8 +1,7 @@
 import java.io.*;
 import java.io.FileWriter;
-import java.util.Locale;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
+
 
 public class Theatre {
     public static void main(String[] args) {
@@ -192,18 +191,28 @@ public class Theatre {
 
     public static void cancel_ticket(int[] row1, int[] row2, int[] row3, Scanner scanner) {
 
-        int rowNo;
-        int seatNo;
+        int rowNo = 0;
+        int seatNo = 0;
 
         do {
-            System.out.print("Enter the row number (from 1 to 3) : ");
-            rowNo = scanner.nextInt();
+            try {
+                System.out.print("Enter the row number (from 1 to 3) : ");
+                rowNo = scanner.nextInt();
+            } catch(Exception e) {
+                System.out.println("Invalid - Enter only integers");
+                scanner.next();
+            }
         } while (rowNo > 3 || rowNo < 1);
 
         if (rowNo==1) {
             do {
-                System.out.print("Enter the seat number : ");
-                seatNo = scanner.nextInt();
+                try {
+                    System.out.print("Enter the seat number : ");
+                    seatNo = scanner.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Invalid - Enter only integers");
+                    scanner.nextLine();
+                }
             } while (seatNo<1 || seatNo>12);
 
             seatNo-=1;
