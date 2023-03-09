@@ -1,14 +1,18 @@
 import java.io.*;
 import java.io.FileWriter;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Theatre {
     public static void main(String[] args) {
 
-        int [] row1 = {0,0,0,0,0,0,0,0,1,0,0,0};
+        int [] row1 = {0,0,0,0,0,0,0,0,0,0,0,0};
         int [] row2 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-        int [] row3 = {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1};
+        int [] row3 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         boolean repeat = true;
+        int userOption;
+        String saveAndExit;
 
 
         Scanner scanner = new Scanner(System.in);
@@ -32,8 +36,14 @@ public class Theatre {
 
         do {
             System.out.println(mainMenu);
-            System.out.print("PLease enter your option here : ");
-            int userOption = scanner.nextInt();
+            try {
+                System.out.print("Please enter your option here : ");
+                userOption = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid - Enter only integers");
+                scanner.nextLine();
+                continue;
+            }
 
             if (userOption == 1)
                 buy_ticket(row1, row2, row3, scanner);
@@ -45,30 +55,51 @@ public class Theatre {
                 show_ticket(row1, row2, row3);
             else if (userOption == 5)
                 save(row1, row2, row3);
-            else if (userOption == 6) {
+            else if (userOption == 6)
                 load(row1, row2, row3);
-            } else if (userOption == 0) {
+            else if (userOption == 0) {
+                System.out.print("Do you want to save the data before exiting the program (y/n) : ");
+                saveAndExit = scanner.next();
+                saveAndExit.toLowerCase();
+
+                if ( saveAndExit=="y" || saveAndExit=="yes" )
+                    save(row1,row2,row3);
+
                 System.out.println("Thank you for using New Theatre");
-                repeat = false;
-            }
+                repeat=false;
+
+            } else
+                System.out.println("Invalid - Enter a valid integer");
         } while (repeat==true);
 
     }
 
     public static void buy_ticket(int[] row1, int[] row2, int[] row3,Scanner scanner) {
-        int rowNo;
-        int seatNo;
+        int rowNo = 0;
+        int seatNo = 0;
 
         do {
-            System.out.print("Please enter the row number : ");
-            rowNo = scanner.nextInt();
-        } while (rowNo>3 || rowNo<1);
+
+            try {
+                System.out.print("Please enter the row number : ");
+                rowNo = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid - Enter only integers");
+                scanner.nextLine();
+            }
+        }while (rowNo > 3 || rowNo < 1) ;
+        
 
         if (rowNo==1) {
             while (true) {
                 do {
-                    System.out.print("Please enter the seat number : ");
-                    seatNo = scanner.nextInt();
+                    try {
+                        System.out.print("Please enter the seat number : ");
+                        seatNo = scanner.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Invalid - Enter only integers");
+                        scanner.nextLine();
+                    }
                 } while (seatNo > 12 || seatNo < 1);
 
                 seatNo = seatNo - 1;
@@ -84,8 +115,13 @@ public class Theatre {
         } else if (rowNo==2) {
             while (true) {
                 do {
-                    System.out.print("Please enter the seat number : ");
-                    seatNo = scanner.nextInt();
+                    try {
+                        System.out.print("Please enter the seat number : ");
+                        seatNo = scanner.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Invalid - Enter only integers");
+                        scanner.nextLine();
+                    }
                 } while (seatNo > 16 || seatNo < 1);
 
                 seatNo = seatNo - 1;
@@ -98,8 +134,13 @@ public class Theatre {
         } else if (rowNo==3) {
             while (true) {
                 do {
-                    System.out.print("Please enter the seat number : ");
-                    seatNo = scanner.nextInt();
+                    try {
+                        System.out.print("Please enter the seat number : ");
+                        seatNo = scanner.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Invalid - Enter only integers");
+                        scanner.nextLine();
+                    }
                 } while (seatNo > 20 || seatNo < 1);
 
                 seatNo = seatNo - 1;
@@ -146,7 +187,7 @@ public class Theatre {
 
             count+=1;
         }
-        System.out.println("\n\n");
+        System.out.println("");
     }
 
     public static void cancel_ticket(int[] row1, int[] row2, int[] row3, Scanner scanner) {
@@ -256,7 +297,7 @@ public class Theatre {
     }
 
     public static void load(int[] row1, int[] row2, int[] row3) {
-        int [] row = {1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        int [] row = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
         //Read from the file
