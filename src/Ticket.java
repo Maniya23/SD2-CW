@@ -19,6 +19,9 @@ public class Ticket {
         System.out.println("Seat row : "+ row);
         System.out.println("Seat No. : "+ seat);
         System.out.println("price : "+ price);
+
+
+
     }
 
 }
