@@ -1,19 +1,23 @@
 import java.io.*;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Theatre {
     public static void main(String[] args) {
 
+        //Variable Declaration
         int [] row1 = {0,0,0,0,0,0,0,0,0,0,0,0};
         int [] row2 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         int [] row3 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        ArrayList <Ticket> tickets = new ArrayList<>();
         boolean repeat = true;
         int userOption;
         String saveAndExit;
 
 
+        //Making Scanner object
         Scanner scanner = new Scanner(System.in);
 
         String mainMenu = """
@@ -33,6 +37,7 @@ public class Theatre {
 
         System.out.println("Welcome to the New Theatre\n");
 
+        //Iterating main menu
         do {
             System.out.println(mainMenu);
             try {
@@ -45,11 +50,11 @@ public class Theatre {
             }
 
             if (userOption == 1)
-                buy_ticket(row1, row2, row3, scanner);
+                buy_ticket(row1, row2, row3, scanner,tickets);
             else if (userOption == 2)
                 print_seating_area(row1, row2, row3);
             else if (userOption == 3)
-                cancel_ticket(row1, row2, row3, scanner);
+                cancel_ticket(row1, row2, row3, scanner,tickets);
             else if (userOption == 4)
                 show_ticket(row1, row2, row3);
             else if (userOption == 5)
@@ -73,10 +78,11 @@ public class Theatre {
 
     }
 
-    public static void buy_ticket(int[] row1, int[] row2, int[] row3,Scanner scanner) {
+    public static void buy_ticket(int[] row1, int[] row2, int[] row3,Scanner scanner,ArrayList<Ticket> tickets) {
         int rowNo = 0;
         int seatNo = 0;
 
+        //Taking row number as input
         do {
 
             try {
@@ -90,6 +96,7 @@ public class Theatre {
         
 
         if (rowNo==1) {
+            //Taking seat no as input
             while (true) {
                 do {
                     try {
@@ -104,6 +111,26 @@ public class Theatre {
                 seatNo = seatNo - 1;
                 if (row1[seatNo] == 0) {
                     row1[seatNo] = 1;
+
+                    //Taking person details
+                    System.out.print("Enter your First Name : ");
+                    String name = scanner.next();
+                    System.out.print("Enter your Surname : ");
+                    String sNmae = scanner.next();
+                    System.out.println("Enter your Email : ");
+                    String email = scanner.next();
+
+                    //Creating a new person
+                    Person person = new Person(name,sNmae,email);
+
+                    //Creating a new ticket
+                    Ticket ticket = new Ticket(rowNo,seatNo,100,person);
+
+                    //Adding tickets
+                    tickets.add(ticket);
+                    ticket.print();
+
+                    System.out.println("Seat booked Successfully");
                     break;
                 }
                 else {
@@ -112,6 +139,7 @@ public class Theatre {
             }
 
         } else if (rowNo==2) {
+            //Taking seat no as input
             while (true) {
                 do {
                     try {
@@ -126,11 +154,33 @@ public class Theatre {
                 seatNo = seatNo - 1;
                 if (row2[seatNo] == 0) {
                     row2[seatNo] = 1;
+
+                    //Taking person details
+                    System.out.print("Enter your First Name : ");
+                    String name = scanner.next();
+                    System.out.print("Enter your Surname : ");
+                    String sNmae = scanner.next();
+                    System.out.println("Enter your Email : ");
+                    String email = scanner.next();
+
+                    //Creating a new person
+                    Person person = new Person(name,sNmae,email);
+
+                    //Creating a new ticket
+                    Ticket ticket = new Ticket(rowNo,seatNo,100,person);
+
+                    //Adding tickets
+                    tickets.add(ticket);
+                    ticket.print();
+
+                    System.out.println("Seat booked Successfully");
                     break;
+
                 }else
                     System.out.println("Seat is already occupied\n");
             }
         } else if (rowNo==3) {
+            //Taking seat no as input
             while (true) {
                 do {
                     try {
@@ -145,7 +195,28 @@ public class Theatre {
                 seatNo = seatNo - 1;
                 if (row3[seatNo] == 0) {
                     row3[seatNo] = 1;
+
+                    //Taking person details
+                    System.out.print("Enter your First Name : ");
+                    String name = scanner.next();
+                    System.out.print("Enter your Surname : ");
+                    String sNmae = scanner.next();
+                    System.out.println("Enter your Email : ");
+                    String email = scanner.next();
+
+                    //Creating a new person
+                    Person person = new Person(name,sNmae,email);
+
+                    //Creating a new ticket
+                    Ticket ticket = new Ticket(rowNo,seatNo,100,person);
+
+                    //Adding tickets
+                    tickets.add(ticket);
+                    ticket.print();
+
+                    System.out.println("Seat booked Successfully");
                     break;
+
                 } else
                     System.out.println("Seat is already occupied\n");
             }
@@ -154,12 +225,12 @@ public class Theatre {
     }
 
     public static void print_seating_area(int[] row1, int[] row2, int[] row3) {
+        // Printing stage
         System.out.println("\t***********\n\t*  STAGE  *\n\t***********");
         System.out.print("\t");
         print_seat_rows(row1);
-        System.out.print("\n  ");
+        System.out.print("  ");
         print_seat_rows(row2);
-        System.out.println();
         print_seat_rows(row3);
 
         System.out.println("\n\n");
@@ -189,7 +260,7 @@ public class Theatre {
         System.out.println("");
     }
 
-    public static void cancel_ticket(int[] row1, int[] row2, int[] row3, Scanner scanner) {
+    public static void cancel_ticket(int[] row1, int[] row2, int[] row3, Scanner scanner,ArrayList<Ticket> tickets) {
 
         int rowNo = 0;
         int seatNo = 0;
@@ -218,6 +289,14 @@ public class Theatre {
             seatNo-=1;
             if (row1[seatNo]==1) {
                 row1[seatNo] = 0;
+
+                for (int i = 0; i < tickets.size(); i++) {
+                    if (tickets.get(i).getRow()==rowNo && tickets.get(i).getSeat()==seatNo) {
+                        tickets.remove(i);
+                    }
+                }
+
+
                 System.out.println("Row "+rowNo+" seat "+(seatNo+1)+" is now available");
             }
             else
@@ -231,6 +310,13 @@ public class Theatre {
             seatNo-=1;
             if (row2[seatNo]==1) {
                 row2[seatNo] = 0;
+
+                for (int i = 0; i < tickets.size(); i++) {
+                    if (tickets.get(i).getRow()==rowNo && tickets.get(i).getSeat()==seatNo) {
+                        tickets.remove(i);
+                    }
+                }
+
                 System.out.println("Row "+rowNo+" seat "+(seatNo+1)+" is now available");
             }
             else
@@ -244,6 +330,13 @@ public class Theatre {
             seatNo-=1;
             if (row3[seatNo]==1) {
                 row3[seatNo] = 0;
+
+                for (int i = 0; i < tickets.size(); i++) {
+                    if (tickets.get(i).getRow()==rowNo && tickets.get(i).getSeat()==seatNo) {
+                        tickets.remove(i);
+                    }
+                }
+
                 System.out.println("Row "+rowNo+" seat "+(seatNo+1)+" is now available");
             }
             else
@@ -347,4 +440,7 @@ public class Theatre {
         }
     }
 
+    public static void show_tickets_info() {
+
+    }
 }

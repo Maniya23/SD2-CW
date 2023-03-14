@@ -12,6 +12,14 @@ public class Ticket {
         this.person = person;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getSeat() {
+        return seat;
+    }
+
     public void print() {
         System.out.println("Name : " + person.getName());
         System.out.println("Surname : " +person.getSurname());
