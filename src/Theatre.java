@@ -68,6 +68,7 @@ public class Theatre {
                 saveAndExit = scanner.next();
                 saveAndExit.toLowerCase();
 
+                // Asking to save the file before exit
                 if ( saveAndExit=="y" || saveAndExit=="yes" )
                     save(row1,row2,row3);
 
@@ -115,7 +116,7 @@ public class Theatre {
                     row1[seatNo] = 1;
 
                     double price = 250;
-                    ticketing_person(scanner,rowNo,seatNo,price,tickets);
+                    ticketing_person(scanner,rowNo,seatNo,price,tickets); // Creating a new person and a ticket
                     System.out.println("Seat booked Successfully");
                     break;
                 }
@@ -142,7 +143,7 @@ public class Theatre {
                     row2[seatNo] = 1;
 
                     double price = 200;
-                    ticketing_person(scanner,rowNo,seatNo,price,tickets);
+                    ticketing_person(scanner,rowNo,seatNo,price,tickets); // Creating a new person and a ticket
                     System.out.println("Seat booked Successfully");
                     break;
 
@@ -167,7 +168,7 @@ public class Theatre {
                     row3[seatNo] = 1;
 
                     double price=100;
-                    ticketing_person(scanner,rowNo,seatNo,price,tickets);
+                    ticketing_person(scanner,rowNo,seatNo,price,tickets); // Creating a new person and a ticket
                     System.out.println("Seat booked Successfully");
                     break;
 
@@ -179,7 +180,7 @@ public class Theatre {
     }
 
     public static void ticketing_person(Scanner scanner, int rowNo, int seatNo, double price, ArrayList<Ticket> tickets) {
-        //Taking person details
+        // Taking person details
         System.out.print("Enter your First Name : ");
         String name = scanner.next();
         System.out.print("Enter your Surname : ");
@@ -187,15 +188,14 @@ public class Theatre {
         System.out.println("Enter your Email : ");
         String email = scanner.next();
 
-        //Creating a new person
+        // Creating a new person
         Person person = new Person(name,sNmae,email);
 
-        //Creating a new ticket
+        // Creating a new ticket
         Ticket ticket = new Ticket(rowNo,seatNo,price,person);
 
-        //Adding tickets
+        // Adding tickets
         tickets.add(ticket);
-        ticket.print();
     }
 
     public static void print_seating_area(int[] row1, int[] row2, int[] row3) {
@@ -211,6 +211,8 @@ public class Theatre {
     }
 
     public static void print_seat_rows(int[] row) {
+
+        //　Printing the seating area of the theatre
         int count=1;
         for (int element:row) {
 
@@ -239,6 +241,7 @@ public class Theatre {
         int rowNo = 0;
         int seatNo = 0;
 
+        // Asking user for the row to change
         do {
             try {
                 System.out.print("Enter the row number (from 1 to 3) : ");
@@ -250,6 +253,8 @@ public class Theatre {
         } while (rowNo > 3 || rowNo < 1);
 
         if (rowNo==1) {
+
+            // Asking user for the seat to cancel
             do {
                 try {
                     System.out.print("Enter the seat number : ");
@@ -275,7 +280,10 @@ public class Theatre {
             }
             else
                 System.out.println("This seat is already available");
+
         } else if (rowNo==2) {
+
+            // Asking user for the seat to cancel
             do {
                 System.out.print("Enter the seat number : ");
                 seatNo = scanner.nextInt();
@@ -295,7 +303,10 @@ public class Theatre {
             }
             else
                 System.out.println("This seat is already available");
+
         } else{
+
+            // Asking user for the seat to cancel
             do {
                 System.out.print("Enter the seat number : ");
                 seatNo = scanner.nextInt();
@@ -323,6 +334,7 @@ public class Theatre {
 
     public static void show_ticket(int[] row1, int[] row2, int[] row3) {
 
+        // Printing the available seats
         System.out.print("Seats available in row 1 : ");
         print_seats_available(row1);
 
@@ -336,6 +348,8 @@ public class Theatre {
     }
 
     public static void print_seats_available(int []row) {
+
+        // Printing available seats
         int count = 0;
 
         for (int i = 0; i < row.length; i++) {
@@ -352,7 +366,7 @@ public class Theatre {
     }
 
     public static void save(int[] row1, int[] row2, int[] row3) {
-        //Write to the file
+        // Write the row and seat info to the file
         try {
             FileWriter seatFile = new FileWriter("SeatInfoTest.txt");
             for (int i = 0; i < row1.length; i++) {
@@ -376,14 +390,14 @@ public class Theatre {
         int [] row = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
-        //Read from the file
+        // Read information form the saved file
         try {
             File file = new File("SeatInfoTest.txt");
             Scanner file_reader = new Scanner(file);
             while (file_reader.hasNextLine()) {
                 for (int i = 0; i < row.length; i++) {
                     if (file_reader.hasNext()) {
-                        int digit = Integer.parseInt(file_reader.next());
+                        int digit = Integer.parseInt(file_reader.next()); // Saving the information to a large array
                         row[i] = digit;
                     }
 
@@ -397,6 +411,7 @@ public class Theatre {
             e.printStackTrace();
         }
 
+        // Separating the larger array's information in to the 3 rows
         int count=0;
         for (int i = 0; i < row1.length; i++) {
             row1[i]=row[count];
@@ -419,6 +434,7 @@ public class Theatre {
         double totalTicketPrice=0;
 
 
+        // Printing the tickets
         for (Ticket e:tickets) {
             System.out.println("Ticket "+count);
             e.print();
@@ -427,6 +443,6 @@ public class Theatre {
             count++;
         }
 
-        System.out.println(totalTicketPrice);
+        System.out.println(totalTicketPrice); // Total price of all the tickets
     }
 }

@@ -9,6 +9,7 @@ public class Person {
                 this.email = email;
         }
 
+        // Getters for person information
         public String getName() {
                 return name;
         }

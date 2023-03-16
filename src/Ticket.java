@@ -12,6 +12,7 @@ public class Ticket {
         this.person = person;
     }
 
+    // Getters for ticket information
     public int getRow() {
         return row;
     }
@@ -25,6 +26,8 @@ public class Ticket {
     }
 
     public void print() {
+
+        // Printing the ticket information
         System.out.println("Name : " + person.getName());
         System.out.println("Surname : " +person.getSurname());
         System.out.println("Email : " + person.getEmail());
