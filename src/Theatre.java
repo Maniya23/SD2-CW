@@ -61,6 +61,8 @@ public class Theatre {
                 save(row1, row2, row3);
             else if (userOption == 6)
                 load(row1, row2, row3);
+            else if (userOption==7)
+                show_tickets_info(tickets);
             else if (userOption == 0) {
                 System.out.print("Do you want to save the data before exiting the program (y/n) : ");
                 saveAndExit = scanner.next();
@@ -112,24 +114,8 @@ public class Theatre {
                 if (row1[seatNo] == 0) {
                     row1[seatNo] = 1;
 
-                    //Taking person details
-                    System.out.print("Enter your First Name : ");
-                    String name = scanner.next();
-                    System.out.print("Enter your Surname : ");
-                    String sNmae = scanner.next();
-                    System.out.println("Enter your Email : ");
-                    String email = scanner.next();
-
-                    //Creating a new person
-                    Person person = new Person(name,sNmae,email);
-
-                    //Creating a new ticket
-                    Ticket ticket = new Ticket(rowNo,seatNo,100,person);
-
-                    //Adding tickets
-                    tickets.add(ticket);
-                    ticket.print();
-
+                    double price = 250;
+                    ticketing_person(scanner,rowNo,seatNo,price,tickets);
                     System.out.println("Seat booked Successfully");
                     break;
                 }
@@ -155,24 +141,8 @@ public class Theatre {
                 if (row2[seatNo] == 0) {
                     row2[seatNo] = 1;
 
-                    //Taking person details
-                    System.out.print("Enter your First Name : ");
-                    String name = scanner.next();
-                    System.out.print("Enter your Surname : ");
-                    String sNmae = scanner.next();
-                    System.out.println("Enter your Email : ");
-                    String email = scanner.next();
-
-                    //Creating a new person
-                    Person person = new Person(name,sNmae,email);
-
-                    //Creating a new ticket
-                    Ticket ticket = new Ticket(rowNo,seatNo,100,person);
-
-                    //Adding tickets
-                    tickets.add(ticket);
-                    ticket.print();
-
+                    double price = 200;
+                    ticketing_person(scanner,rowNo,seatNo,price,tickets);
                     System.out.println("Seat booked Successfully");
                     break;
 
@@ -196,24 +166,8 @@ public class Theatre {
                 if (row3[seatNo] == 0) {
                     row3[seatNo] = 1;
 
-                    //Taking person details
-                    System.out.print("Enter your First Name : ");
-                    String name = scanner.next();
-                    System.out.print("Enter your Surname : ");
-                    String sNmae = scanner.next();
-                    System.out.println("Enter your Email : ");
-                    String email = scanner.next();
-
-                    //Creating a new person
-                    Person person = new Person(name,sNmae,email);
-
-                    //Creating a new ticket
-                    Ticket ticket = new Ticket(rowNo,seatNo,100,person);
-
-                    //Adding tickets
-                    tickets.add(ticket);
-                    ticket.print();
-
+                    double price=100;
+                    ticketing_person(scanner,rowNo,seatNo,price,tickets);
                     System.out.println("Seat booked Successfully");
                     break;
 
@@ -222,6 +176,26 @@ public class Theatre {
             }
         }
         System.out.println("\n");
+    }
+
+    public static void ticketing_person(Scanner scanner, int rowNo, int seatNo, double price, ArrayList<Ticket> tickets) {
+        //Taking person details
+        System.out.print("Enter your First Name : ");
+        String name = scanner.next();
+        System.out.print("Enter your Surname : ");
+        String sNmae = scanner.next();
+        System.out.println("Enter your Email : ");
+        String email = scanner.next();
+
+        //Creating a new person
+        Person person = new Person(name,sNmae,email);
+
+        //Creating a new ticket
+        Ticket ticket = new Ticket(rowNo,seatNo,price,person);
+
+        //Adding tickets
+        tickets.add(ticket);
+        ticket.print();
     }
 
     public static void print_seating_area(int[] row1, int[] row2, int[] row3) {
@@ -440,7 +414,19 @@ public class Theatre {
         }
     }
 
-    public static void show_tickets_info() {
+    public static void show_tickets_info(ArrayList<Ticket> tickets) {
+        int count = 1;
+        double totalTicketPrice=0;
 
+
+        for (Ticket e:tickets) {
+            System.out.println("Ticket "+count);
+            e.print();
+            System.out.println("--------------------------------------------");
+            totalTicketPrice=totalTicketPrice+e.getPrice();
+            count++;
+        }
+
+        System.out.println(totalTicketPrice);
     }
 }

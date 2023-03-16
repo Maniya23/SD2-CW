@@ -20,16 +20,17 @@ public class Ticket {
         return seat;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void print() {
         System.out.println("Name : " + person.getName());
         System.out.println("Surname : " +person.getSurname());
         System.out.println("Email : " + person.getEmail());
         System.out.println("Seat row : "+ row);
         System.out.println("Seat No. : "+ seat);
-        System.out.println("price : "+ price);
-
-
-
+        System.out.println("Price : "+ price);
     }
 
 }
