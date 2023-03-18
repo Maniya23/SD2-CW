@@ -31,7 +31,7 @@ public class Theatre {
                 6) Load from file
                 7) Print ticket information and total price
                 8) Sort tickets by price
-                    0) Quit
+                0) Quit
                 -------------------------------------------------
                 """;
 
@@ -88,12 +88,16 @@ public class Theatre {
         int rowNo = 0;
         int seatNo = 0;
 
-        //Taking row number as input
+        // Taking row number as input
         do {
 
             try {
                 System.out.print("Please enter the row number : ");
                 rowNo = scanner.nextInt();
+
+                if (rowNo > 3 || rowNo < 1)
+                    System.out.println("Invalid row number");
+
             } catch (Exception e) {
                 System.out.println("Invalid - Enter only integers");
                 scanner.nextLine();
@@ -101,6 +105,7 @@ public class Theatre {
         } while (rowNo > 3 || rowNo < 1);
 
 
+        // If row is 1
         if (rowNo == 1) {
             //Taking seat no as input
             while (true) {
@@ -108,6 +113,10 @@ public class Theatre {
                     try {
                         System.out.print("Please enter the seat number : ");
                         seatNo = scanner.nextInt();
+
+                        if (seatNo > 12 || seatNo < 1)
+                            System.out.println("Invalid seat number");
+
                     } catch (Exception e) {
                         System.out.println("Invalid - Enter only integers");
                         scanner.nextLine();
@@ -127,13 +136,18 @@ public class Theatre {
                 }
             }
 
-        } else if (rowNo == 2) {
-            //Taking seat no as input
+
+        } else if (rowNo == 2) { // If row is 2
+            // Taking seat no as input
             while (true) {
                 do {
                     try {
                         System.out.print("Please enter the seat number : ");
                         seatNo = scanner.nextInt();
+
+                        if (seatNo > 16 || seatNo < 1)
+                            System.out.println("Invalid seat number");
+
                     } catch (Exception e) {
                         System.out.println("Invalid - Enter only integers");
                         scanner.nextLine();
@@ -152,13 +166,17 @@ public class Theatre {
                 } else
                     System.out.println("Seat is already occupied\n");
             }
-        } else if (rowNo == 3) {
+        } else if (rowNo == 3) { // If row is 3
             //Taking seat no as input
             while (true) {
                 do {
                     try {
                         System.out.print("Please enter the seat number : ");
                         seatNo = scanner.nextInt();
+
+                        if (seatNo > 20 || seatNo < 1)
+                            System.out.println("Invalid seat number");
+
                     } catch (Exception e) {
                         System.out.println("Invalid - Enter only integers");
                         scanner.nextLine();
@@ -247,19 +265,27 @@ public class Theatre {
             try {
                 System.out.print("Enter the row number (from 1 to 3) : ");
                 rowNo = scanner.nextInt();
+
+                if (rowNo > 3 || rowNo < 1)
+                    System.out.println("Invalid row number");
+
             } catch (Exception e) {
                 System.out.println("Invalid - Enter only integers");
                 scanner.next();
             }
         } while (rowNo > 3 || rowNo < 1);
 
-        if (rowNo == 1) {
+        if (rowNo == 1) { // If row no is 1
 
             // Asking user for the seat to cancel
             do {
                 try {
                     System.out.print("Enter the seat number : ");
                     seatNo = scanner.nextInt();
+
+                    if (seatNo < 1 || seatNo > 12)
+                        System.out.println("Invalid seat number");
+
                 } catch (Exception e) {
                     System.out.println("Invalid - Enter only integers");
                     scanner.nextLine();
@@ -281,12 +307,21 @@ public class Theatre {
             } else
                 System.out.println("This seat is already available");
 
-        } else if (rowNo == 2) {
+        } else if (rowNo == 2) { // If row no is 2
 
             // Asking user for the seat to cancel
             do {
-                System.out.print("Enter the seat number : ");
-                seatNo = scanner.nextInt();
+                try {
+                    System.out.print("Enter the seat number : ");
+                    seatNo = scanner.nextInt();
+
+                    if (seatNo < 1 || seatNo > 16)
+                        System.out.println("Invalid seat number");
+
+                } catch (Exception e) {
+                    System.out.println("Invalid - Enter only integers");
+                    scanner.nextLine();
+                }
             } while (seatNo < 1 || seatNo > 16);
 
             seatNo -= 1;
@@ -303,12 +338,21 @@ public class Theatre {
             } else
                 System.out.println("This seat is already available");
 
-        } else {
+        } else { // if row no is 3
 
             // Asking user for the seat to cancel
             do {
-                System.out.print("Enter the seat number : ");
-                seatNo = scanner.nextInt();
+                try {
+                    System.out.print("Enter the seat number : ");
+                    seatNo = scanner.nextInt();
+
+                    if (seatNo < 1 || seatNo > 20)
+                        System.out.println("Invalid seat number");
+
+                } catch (Exception e) {
+                    System.out.println("Invalid - Enter only integers");
+                    scanner.nextLine();
+                }
             } while (seatNo < 1 || seatNo > 20);
 
             seatNo -= 1;
@@ -326,7 +370,7 @@ public class Theatre {
                 System.out.println("This seat is already available");
         }
 
-        System.out.println("\n\n");
+        System.out.println("\n");
 
     }
 
@@ -456,7 +500,7 @@ public class Theatre {
         SelectionSort(sortTickets); // function to sort the new array of tickets
     }
 
-    private static void SelectionSort(ArrayList<Ticket> sortTickets) {
+    private static void SelectionSort(ArrayList<Ticket> sortTickets) {  // Selection sort method referred from Lecture 8 - Sorting and Search Algorithms
         int count = 1;
         int minIndex;
         Ticket temp;
@@ -468,7 +512,7 @@ public class Theatre {
             for (int i = start + 1; i <= arrayLen - 1; i++) {
                 if (sortTickets.get(i).getPrice() < sortTickets.get(minIndex).getPrice()) minIndex = i;
                 temp = sortTickets.get(i);
-                sortTickets.set(start,sortTickets.get(minIndex));
+                sortTickets.set(start,sortTickets.get(minIndex));  // arrayList.set() method referred from (w3resource.com,2022) referenced below
                 sortTickets.set(minIndex,temp);
             }
         }
@@ -482,3 +526,9 @@ public class Theatre {
         }
     }
 }
+
+/*code references
+* w3resource, 2022. Java ArrayList.set() Method. https://www.w3resource.com/java-tutorial/arraylist/arraylist_set.php#:~:text=public%20E%20set(int%20index%2C%20E%20element)&text=set()%20method%20is%20used,object%20at%20the%20specified%20index.&text=The%20index%20of%20the%20element%20to%20be%20set.&text=Element%20to%20be%20stored%20at%20the%20specified%20position. Accessed on (16/03/2023).
+*
+* Lecture notes week 8. Sorting and search algorithms. Accessed on (16/03/2023).
+* */
