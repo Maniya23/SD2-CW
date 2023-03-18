@@ -31,9 +31,8 @@ public class Ticket {
         System.out.println("Name : " + person.getName());
         System.out.println("Surname : " +person.getSurname());
         System.out.println("Email : " + person.getEmail());
-        System.out.println("Seat row : "+ row);
-        System.out.println("Seat No. : "+ seat);
+        System.out.println("Seat row number : "+ row);
+        System.out.println("Seat number. : "+ seat);
         System.out.println("Price : "+ price);
     }
-
 }

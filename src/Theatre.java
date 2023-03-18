@@ -1,13 +1,14 @@
 import java.io.*;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 
 public class Theatre {
     public static void main(String[] args) {
 
-        //Variable Declaration
+        // Variable Declaration
         int[] row1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int[] row2 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int[] row3 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -31,7 +32,7 @@ public class Theatre {
                 6) Load from file
                 7) Print ticket information and total price
                 8) Sort tickets by price
-                0) Quit
+                \t0) Quit
                 -------------------------------------------------
                 """;
 
@@ -127,8 +128,8 @@ public class Theatre {
                 if (row1[seatNo] == 0) {
                     row1[seatNo] = 1;
 
-                    double price = 250;
-                    ticketing_person(scanner, rowNo, seatNo, price, tickets); // Creating a new person and a ticket
+                    double price = 25;
+                    ticketing_person(scanner, rowNo, seatNo+1, price, tickets); // Creating a new person and a ticket
                     System.out.println("Seat booked Successfully");
                     break;
                 } else {
@@ -158,8 +159,8 @@ public class Theatre {
                 if (row2[seatNo] == 0) {
                     row2[seatNo] = 1;
 
-                    double price = 200;
-                    ticketing_person(scanner, rowNo, seatNo, price, tickets); // Creating a new person and a ticket
+                    double price = 20;
+                    ticketing_person(scanner, rowNo, seatNo+1, price, tickets); // Creating a new person and a ticket
                     System.out.println("Seat booked Successfully");
                     break;
 
@@ -187,8 +188,8 @@ public class Theatre {
                 if (row3[seatNo] == 0) {
                     row3[seatNo] = 1;
 
-                    double price = 100;
-                    ticketing_person(scanner, rowNo, seatNo, price, tickets); // Creating a new person and a ticket
+                    double price = 10;
+                    ticketing_person(scanner, rowNo, seatNo+1, price, tickets); // Creating a new person and a ticket
                     System.out.println("Seat booked Successfully");
                     break;
 
@@ -204,12 +205,12 @@ public class Theatre {
         System.out.print("Enter your First Name : ");
         String name = scanner.next();
         System.out.print("Enter your Surname : ");
-        String sNmae = scanner.next();
+        String sName = scanner.next();
         System.out.println("Enter your Email : ");
         String email = scanner.next();
 
         // Creating a new person
-        Person person = new Person(name, sNmae, email);
+        Person person = new Person(name, sName, email);
 
         // Creating a new ticket
         Ticket ticket = new Ticket(rowNo, seatNo, price, person);
@@ -227,7 +228,7 @@ public class Theatre {
         print_seat_rows(row2);
         print_seat_rows(row3);
 
-        System.out.println("\n\n");
+        System.out.println("\n");
     }
 
     private static void print_seat_rows(int[] row) {
@@ -511,10 +512,9 @@ public class Theatre {
         for (int start = 0; start < arrayLen - 1; start++) {
             minIndex = start;
             for (int i = start + 1; i <= arrayLen - 1; i++) {
-                if (sortTickets.get(i).getPrice() < sortTickets.get(minIndex).getPrice()) minIndex = i;
-                temp = sortTickets.get(i);
-                sortTickets.set(start,sortTickets.get(minIndex));  // arrayList.set() method referred from (w3resource.com,2022) referenced below
-                sortTickets.set(minIndex,temp);
+                if (sortTickets.get(i).getPrice() < sortTickets.get(minIndex).getPrice())
+                    minIndex = i;
+                Collections.swap(sortTickets, start, minIndex); // Using Swap method in the Collections class in java referred from ("JavaTpoint") website.
             }
         }
 
@@ -529,7 +529,8 @@ public class Theatre {
 }
 
 /*code references
-* w3resource, 2022. Java ArrayList.set() Method. https://www.w3resource.com/java-tutorial/arraylist/arraylist_set.php#:~:text=public%20E%20set(int%20index%2C%20E%20element)&text=set()%20method%20is%20used,object%20at%20the%20specified%20index.&text=The%20index%20of%20the%20element%20to%20be%20set.&text=Element%20to%20be%20stored%20at%20the%20specified%20position. Accessed on (16/03/2023).
-*
 * Lecture notes week 8. Sorting and search algorithms. Accessed on (16/03/2023).
+*
+* JavaTpoint. Java Collections swap() Method. https://www.javatpoint.com/java-collections-swap-method. Accessed on [18/03/2023].
+*
 * */
