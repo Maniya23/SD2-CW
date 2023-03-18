@@ -410,7 +410,7 @@ public class Theatre {
     private static void save(int[] row1, int[] row2, int[] row3) {
         // Write the row and seat info to the file
         try {
-            FileWriter seatFile = new FileWriter("SeatInfoTest.txt");
+            FileWriter seatFile = new FileWriter("SeatInfo.txt");
             for (int i = 0; i < row1.length; i++) {
                 seatFile.write(row1[i] + " ");
             }
@@ -434,7 +434,7 @@ public class Theatre {
 
         // Read information form the saved file
         try {
-            File file = new File("SeatInfoTest.txt");
+            File file = new File("SeatInfo.txt");
             Scanner file_reader = new Scanner(file);
             while (file_reader.hasNextLine()) {
                 for (int i = 0; i < row.length; i++) {
@@ -448,6 +448,7 @@ public class Theatre {
 
             }
             file_reader.close();
+            System.out.println("File has been loaded successfully.......");
         } catch (IOException e) {
             System.out.println("Error while reading a file.");
             e.printStackTrace();
