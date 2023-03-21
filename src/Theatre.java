@@ -5,6 +5,14 @@ import java.util.Collections;
 import java.util.Scanner;
 
 
+/*
+* 4COSC010C - Software Development II
+* A program created for 'New Theatre' to manage and control the seats that have been sold and the seats that are still available for one of their theatre sessions.
+* Name : H.M.R.D. Fonseka
+* IIT ID : 20210776
+* UoW ID : w1953863
+*/
+
 public class Theatre {
     public static void main(String[] args) {
 
@@ -85,6 +93,7 @@ public class Theatre {
 
     }
 
+    // Method added to buy tickets when user selects 1 from the main menu.
     private static void buy_ticket(int[] row1, int[] row2, int[] row3, Scanner scanner, ArrayList<Ticket> tickets) {
         int rowNo = 0;
         int seatNo = 0;
@@ -200,6 +209,7 @@ public class Theatre {
         System.out.println("\n");
     }
 
+    // Method added to create a ticket and a person when buying a ticket.
     private static void ticketing_person(Scanner scanner, int rowNo, int seatNo, double price, ArrayList<Ticket> tickets) {
         // Taking person details
         System.out.print("Enter your First Name : ");
@@ -219,6 +229,7 @@ public class Theatre {
         tickets.add(ticket);
     }
 
+    // Method added to show the seats that have been sold and the seats that are still available. This function is called when user selects 2 on the main menu
     private static void print_seating_area(int[] row1, int[] row2, int[] row3) {
         // Printing stage
         System.out.println("\t***********\n\t*  STAGE  *\n\t***********");
@@ -231,6 +242,7 @@ public class Theatre {
         System.out.println("\n");
     }
 
+    // Method added to print each row from the print_seating_area function
     private static void print_seat_rows(int[] row) {
 
         //　Printing the seating area of the theatre
@@ -256,6 +268,7 @@ public class Theatre {
         System.out.println("");
     }
 
+    // Method added to cancel booked tickets. This method is called when user selects 3 in the main menu.
     private static void cancel_ticket(int[] row1, int[] row2, int[] row3, Scanner scanner, ArrayList<Ticket> tickets) {
 
         int rowNo = 0;
@@ -297,12 +310,6 @@ public class Theatre {
             if (row1[seatNo] == 1) {
                 row1[seatNo] = 0;
 
-                for (int i = 0; i < tickets.size(); i++) {
-                    if (tickets.get(i).getRow() == rowNo && tickets.get(i).getSeat() == seatNo) {
-                        tickets.remove(i);
-                    }
-                }
-
 
                 System.out.println("Row " + rowNo + " seat " + (seatNo + 1) + " is now available");
             } else
@@ -329,12 +336,6 @@ public class Theatre {
             if (row2[seatNo] == 1) {
                 row2[seatNo] = 0;
 
-                for (int i = 0; i < tickets.size(); i++) {
-                    if (tickets.get(i).getRow() == rowNo && tickets.get(i).getSeat() == seatNo) {
-                        tickets.remove(i);
-                    }
-                }
-
                 System.out.println("Row " + rowNo + " seat " + (seatNo + 1) + " is now available");
             } else
                 System.out.println("This seat is already available");
@@ -360,21 +361,23 @@ public class Theatre {
             if (row3[seatNo] == 1) {
                 row3[seatNo] = 0;
 
-                for (int i = 0; i < tickets.size(); i++) {
-                    if (tickets.get(i).getRow() == rowNo && tickets.get(i).getSeat() == seatNo) {
-                        tickets.remove(i);
-                    }
-                }
-
                 System.out.println("Row " + rowNo + " seat " + (seatNo + 1) + " is now available");
             } else
                 System.out.println("This seat is already available");
         }
 
+        // Removing the ticket object from the tickets arraylist.
+        seatNo+=1;
+        for (int i = 0; i < tickets.size(); i++) {
+            if (tickets.get(i).getRow() == rowNo && tickets.get(i).getSeat() == seatNo) {
+                tickets.remove(i);
+            }
+        }
         System.out.println("\n");
 
     }
 
+    // Method added to show seats available in each row. This method is called when user selects 4 in the main menu.
     private static void show_ticket(int[] row1, int[] row2, int[] row3) {
 
         // Printing the available seats
@@ -390,6 +393,7 @@ public class Theatre {
         System.out.println("\n\n");
     }
 
+    // method added to print the rows that are given from the function show_ticket.
     private static void print_seats_available(int[] row) {
 
         // Printing available seats
@@ -408,6 +412,7 @@ public class Theatre {
         System.out.print(".");
     }
 
+    // Method added to save the row information to a file. This method is called when user selects 5 in the main menu.
     private static void save(int[] row1, int[] row2, int[] row3) {
         // Write the row and seat info to the file
         try {
@@ -429,6 +434,7 @@ public class Theatre {
         }
     }
 
+    // Method added to load the row information from a saved file. This method is called when user selects 6 in the main menu.
     private static void load(int[] row1, int[] row2, int[] row3) {
         int[] row = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -473,6 +479,7 @@ public class Theatre {
         }
     }
 
+    // Method added to show the tickets and the information that was created relating to the booked tickets. This method is called when user selects 7 in the main menu.
     private static void show_tickets_info(ArrayList<Ticket> tickets) {
         int count = 1;
         double totalTicketPrice = 0;
@@ -490,6 +497,7 @@ public class Theatre {
         System.out.println("Total price of the tickets : " + totalTicketPrice); // Total price of all the tickets
     }
 
+    // Method added to sort the tickets in the ascending order according to the price given. This method is called when user selects 8 in the main menu.
     private static void sort_tickets(ArrayList<Ticket> tickets) {
 
         // Creating a new array list of type Tickets
@@ -502,6 +510,7 @@ public class Theatre {
         SelectionSort(sortTickets); // function to sort the new array of tickets
     }
 
+    // Method added to sort the tickets using the Selection sort method.
     private static void SelectionSort(ArrayList<Ticket> sortTickets) {  // Selection sort method referred from Lecture 8 - Sorting and Search Algorithms
         int count = 1;
         int minIndex;
