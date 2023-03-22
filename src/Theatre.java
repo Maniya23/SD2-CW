@@ -6,11 +6,13 @@ import java.util.Scanner;
 
 
 /*
-* 4COSC010C - Software Development II
+* 4COSC010C.2 - Software Development II
 * A program created for 'New Theatre' to manage and control the seats that have been sold and the seats that are still available for one of their theatre sessions.
 * Name : H.M.R.D. Fonseka
 * IIT ID : 20210776
 * UoW ID : w1953863
+*
+* GitHub Repository link - https://github.com/Maniya23/SD2-CW.git
 */
 
 public class Theatre {
