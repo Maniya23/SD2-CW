@@ -32,7 +32,7 @@ public class Ticket {
         System.out.println("Surname : " +person.getSurname());
         System.out.println("Email : " + person.getEmail());
         System.out.println("Seat row number : "+ row);
-        System.out.println("Seat number. : "+ seat);
+        System.out.println("Seat number : "+ seat);
         System.out.println("Price : "+ price);
     }
 }

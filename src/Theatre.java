@@ -428,7 +428,8 @@ public class Theatre {
             }
 
             seatFile.close();
-            System.out.println("Seat information was successfully written to file");
+            System.out.println("Seat information was successfully written to file SeatInfo.txt\n");
+
         } catch (IOException e) {
             System.out.println("An error was occurred while writing to file");
         }
@@ -452,10 +453,10 @@ public class Theatre {
 
                 }
                 break;
-
             }
             file_reader.close();
             System.out.println("File has been loaded successfully.......");
+
         } catch (IOException e) {
             System.out.println("Error while reading a file.");
             e.printStackTrace();
@@ -487,13 +488,14 @@ public class Theatre {
 
         // Printing the tickets
         for (Ticket e : tickets) {
+            System.out.println("--------------------------------------------");
             System.out.println("Ticket " + count);
             e.print();
-            System.out.println("--------------------------------------------");
             totalTicketPrice = totalTicketPrice + e.getPrice();
             count++;
         }
 
+        System.out.println("--------------------------------------------");
         System.out.println("Total price of the tickets : " + totalTicketPrice); // Total price of all the tickets
     }
 
@@ -529,16 +531,16 @@ public class Theatre {
 
         // Printing the sorted tickets
         for (Ticket e:sortTickets) {
+            System.out.println("-----------------------------------------------");
             System.out.println("Ticket : "+count);
             e.print();
-            System.out.println("-----------------------------------------------");
             count++;
         }
     }
 }
 
 /*code references
-* Lecture notes week 8. Sorting and search algorithms. Accessed on (16/03/2023).
+* Lecture notes week 8. Sorting and search algorithms. Accessed on [16/03/2023].
 *
 * JavaTpoint. Java Collections swap() Method. https://www.javatpoint.com/java-collections-swap-method. Accessed on [18/03/2023].
 *
